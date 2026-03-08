@@ -1,0 +1,12 @@
+name: nirai_shared
+description: Shared styling and UI primitives for Nirai.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1
