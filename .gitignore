@@ -1,0 +1,78 @@
+﻿#############################
+# Nirai: React Native + Node #
+#############################
+
+# Node / package managers
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Logs
+logs/
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Build outputs (general)
+dist/
+build/
+out/
+coverage/
+.nyc_output/
+
+# TypeScript / tooling caches
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+.turbo/
+.nx/
+.parcel-cache/
+
+# Next.js / web tooling (if present)
+.next/
+
+# Expo / React Native
+.expo/
+.expo-shared/
+web-build/
+
+# Metro
+.metro-health-check*
+
+# React Native (iOS)
+ios/Pods/
+ios/build/
+ios/DerivedData/
+*.xcuserstate
+*.xcuserdata/
+
+# React Native (Android)
+android/.gradle/
+android/build/
+android/app/build/
+*.iml
+
+# Detox / E2E
+artifacts/
+
+# Local Firebase (if used)
+.firebase/
+
+# Serverless / functions build artifacts (if applicable)
+server/functions/lib/
+functions/lib/
