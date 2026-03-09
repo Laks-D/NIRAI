@@ -16,7 +16,7 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();
 
-    await tester.pumpWidget(NiraiApp(defaultRole: PortalRole.client, prefs: prefs));
+    await tester.pumpWidget(NiraiApp(defaultRole: PortalRole.client, hasDefaultRole: false, prefs: prefs));
 
     // Landing first.
     expect(find.text('NIRAI'), findsOneWidget);
@@ -24,6 +24,6 @@ void main() {
     // Then onboarding (after landing completes).
     await tester.pump(const Duration(milliseconds: 1400));
     await tester.pumpAndSettle();
-    expect(find.text('Welcome'), findsOneWidget);
+    expect(find.text('Choose portal'), findsOneWidget);
   });
 }
