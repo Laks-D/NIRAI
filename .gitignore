@@ -76,3 +76,6 @@ artifacts/
 # Serverless / functions build artifacts (if applicable)
 server/functions/lib/
 functions/lib/
+
+# Local tooling scratch
+.tmp/
