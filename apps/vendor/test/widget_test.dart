@@ -6,12 +6,18 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:nirai_vendor/main.dart';
+import 'package:nirai_vendor/src/app/app_state_persistence.dart';
 
 void main() {
   testWidgets('Vendor app boots to onboarding', (WidgetTester tester) async {
-    await tester.pumpWidget(const NiraiVendorApp());
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final state = await AppStatePersistence.load(prefs);
+
+    await tester.pumpWidget(NiraiVendorApp(prefs: prefs, state: state));
 
     // Splash first.
     expect(find.text('Nirai Vendor'), findsOneWidget);
