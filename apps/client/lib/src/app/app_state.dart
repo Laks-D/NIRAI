@@ -203,6 +203,11 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void replaceFavorites(Set<String> next) {
+    _favoriteVendorIds = {...next};
+    notifyListeners();
+  }
+
   SilentBellRequest createSilentBell({
     required String vendorId,
     required String typeLabel,
@@ -224,6 +229,11 @@ class AppState extends ChangeNotifier {
     _history = [request, ..._history];
     notifyListeners();
     return request;
+  }
+
+  void replaceHistory(List<SilentBellRequest> next) {
+    _history = List.unmodifiable(next);
+    notifyListeners();
   }
 
   void updateRequestStatus(String requestId, RequestStatus status) {
