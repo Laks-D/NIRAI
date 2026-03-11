@@ -18,11 +18,11 @@ const _kFavorites = '${_kPrefix}favoriteVendorIds';
 const _kHistory = '${_kPrefix}history';
 
 class AppStatePersistence {
-  AppStatePersistence._(this._prefs, this._state, this._onSave);
+  AppStatePersistence._(this._prefs, this._state);
 
   final SharedPreferences _prefs;
   final AppState _state;
-  final VoidCallback _onSave;
+  late final void Function() _unbind;
 
   Timer? _debounce;
 
@@ -70,16 +70,17 @@ class AppStatePersistence {
   }
 
   static AppStatePersistence bind({required SharedPreferences prefs, required AppState state}) {
-    final binder = AppStatePersistence._(prefs, state, () {});
+    final persistence = AppStatePersistence._(prefs, state);
     void save() {
-      binder._debounce?.cancel();
-      binder._debounce = Timer(const Duration(milliseconds: 250), () {
-        binder._saveNow();
+      persistence._debounce?.cancel();
+      persistence._debounce = Timer(const Duration(milliseconds: 250), () {
+        persistence._saveNow();
       });
     }
 
     state.addListener(save);
-    return AppStatePersistence._(prefs, state, () => state.removeListener(save));
+    persistence._unbind = () => state.removeListener(save);
+    return persistence;
   }
 
   Future<void> clearAll() async {
@@ -101,7 +102,7 @@ class AppStatePersistence {
 
   void dispose() {
     _debounce?.cancel();
-    _onSave();
+    _unbind();
   }
 
   Future<void> _saveNow() async {
