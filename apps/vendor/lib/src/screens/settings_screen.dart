@@ -3,6 +3,7 @@ import 'package:nirai_shared/nirai_theme.dart';
 import 'package:nirai_shared/portal_scope.dart';
 
 import '../app/app_state.dart';
+import '../app/app_persistence_scope.dart';
 import '../widgets/quiet_card.dart';
 import '../app/app_shell.dart';
 import 'tracking_settings_screen.dart';
@@ -141,6 +142,7 @@ class SettingsScreen extends StatelessWidget {
                     title: 'Logout',
                     subtitle: 'Remove session from this device',
                     onTap: () {
+                      AppPersistenceScope.maybeOf(context)?.clearAuth();
                       state.logout();
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute<void>(builder: (_) => const AppShell()),
